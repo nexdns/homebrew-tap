@@ -34,9 +34,8 @@ cask "nexdns-cli" do
   binary "nexdns"
 
   postflight do
-    # Homebrew installs the binary unsigned; clear the quarantine flag so
-    # macOS does not refuse to run it on first launch.
-    if system_command("/usr/bin/xattr", args: ["-h"]).exit_status == 0
+    # The binary is unsigned; clear the quarantine flag so macOS runs it.
+    if OS.mac?
       system_command "/usr/bin/xattr",
                      args: ["-dr", "com.apple.quarantine", "#{staged_path}/nexdns"]
     end
