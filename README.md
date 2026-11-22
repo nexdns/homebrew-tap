@@ -3,8 +3,7 @@
 Homebrew casks for [NexDNS](https://nexdns.tech) tooling.
 
 ```bash
-brew tap nexdns/tap
-brew install --cask nexdns-cli
+brew install --cask nexdns/tap/nexdns-cli
 ```
 
 `nexdns-cli` is the command-line client for the NexDNS platform: zones, records,
