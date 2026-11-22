@@ -25,7 +25,7 @@ cask "nexdns-cli" do
 
   name "nexdns-cli"
   desc "CLI tool for managing DNS zones and records via the NexDNS API"
-  homepage "https://nexdns.tech"
+  homepage "https://nexdns.tech/"
 
   livecheck do
     skip "Auto-generated on release."
@@ -33,11 +33,9 @@ cask "nexdns-cli" do
 
   binary "nexdns"
 
-  postflight do
-    # The binary is unsigned; clear the quarantine flag so macOS runs it.
-    if OS.mac?
-      system_command "/usr/bin/xattr",
-                     args: ["-dr", "com.apple.quarantine", "#{staged_path}/nexdns"]
+  postflight_steps do
+    on_macos do
+      run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{staged_path}}/nexdns"]
     end
   end
 
